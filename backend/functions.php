@@ -11,12 +11,14 @@ switch($function){
 function calculate_price(){
   global $dbh;
 
-  if(empty($_POST['days']) || $_POST['days'] < 0){
+  if(empty($_POST['days'])){
     return '<span>Необходимо заполнить количество дней</span>';
+  } else if( !is_numeric($_POST['days']) || $_POST['days'] < 0){
+    return '<span>Недопустимое значение в поле количество дней</span>';
   }
 
   $product_id = $_POST['product'];
-  $days_selected = $_POST['days'];
+  $days_selected = (int)$_POST['days'];
   $services_selected = explode('<<>>', $_POST['checked_services']);
   $result_price = 0;
 
