@@ -29,18 +29,18 @@ $dbh = new sdbh();
           <form method="post" action="" id="form">
             <label class="form-label" for="product">Выберите продукт:</label>
             <select class="form-select" name="product" id="product">
-              <?
+              <?php
                 $products = $dbh->get_all_assoc($dbh->query_exc('select * from a25_products'));
                 foreach($products as $product){ ?>
                   <option value="<?=$product['ID']?>"><?=$product['NAME']?></option>
-                <?
+                <?php
                 }
               ?>
             </select>
             <label for="customRange1" class="form-label">Количество дней:</label>
             <input name="days" type="text" class="form-control" id="customRange1" min="1" max="30">
             <label for="customRange1" class="form-label">Дополнительно:</label>
-            <?
+            <?php
             $services = unserialize($dbh->mselect_rows('a25_settings', ['set_key' => 'services'], 0, 1, 'id')[0]['set_value']);
             foreach($services as $k => $v){ ?>
               <div class="form-check">
@@ -54,7 +54,7 @@ $dbh = new sdbh();
                   <?= $k ?>
                 </label>
               </div>
-              <?
+              <?php
             }
             ?>
             <button type="submit" id="price_button" class="btn btn-primary">Рассчитать</button>

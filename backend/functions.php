@@ -11,8 +11,8 @@ switch($function){
 function calculate_price(){
   global $dbh;
 
-  if(empty($_POST['days'])){
-    return '<span>Необходимо выбрать количество дней</span>';
+  if(empty($_POST['days']) || $_POST['days'] < 0){
+    return '<span>Необходимо заполнить количество дней</span>';
   }
 
   $product_id = $_POST['product'];
